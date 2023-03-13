@@ -11,7 +11,6 @@ class Search extends Component {
       handleChange,
       searchButton,
       search,
-      loading,
       loadingSearch,
       showResults,
       fetchedArtist } = this.props;
@@ -62,6 +61,11 @@ class Search extends Component {
 Search.propTypes = {
   value: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
+  searchButton: PropTypes.string.isRequired,
+  search: PropTypes.string.isRequired,
+  loadingSearch: PropTypes.bool.isRequired,
+  showResults: PropTypes.bool.isRequired,
+  fetchedArtist: PropTypes.string.isRequired,
 };
 
 export default Search;
