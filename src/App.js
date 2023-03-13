@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import Search from './pages/Search';
+import searchAlbumsAPI from './services/searchAlbumsAPI';
 import { createUser } from './services/userAPI';
 
 class App extends React.Component {
@@ -15,7 +16,11 @@ class App extends React.Component {
     inputName: '',
     inputSearch: '',
     loading: false,
+    loadingSearch: false,
     redirectToSearch: false,
+    fetchedArtist: '',
+    search: [],
+    showResults: false,
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -41,13 +46,34 @@ class App extends React.Component {
     });
   };
 
+  searchButton = (event) => {
+    event.preventDefault();
+    const { inputSearch: artista } = this.state;
+    this.setState({
+      loadingSearch: true,
+      inputSearch: '',
+      showResults: true,
+      fetchedArtist: artista,
+    }, async () => {
+      const response = await searchAlbumsAPI(artista);
+      this.setState({
+        search: response,
+        loadingSearch: false,
+      });
+    });
+  };
+
   render() {
     const {
       disabledLogin,
       inputName,
       loading,
+      loadingSearch,
       redirectToSearch,
-      inputSearch } = this.state;
+      inputSearch,
+      search,
+      showResults,
+      fetchedArtist } = this.state;
 
     return (
       <Switch>
@@ -70,6 +96,12 @@ class App extends React.Component {
           render={ () => (<Search
             handleChange={ this.handleChange }
             value={ inputSearch }
+            searchButton={ this.searchButton }
+            search={ search }
+            loading={ loading }
+            loadingSearch={ loadingSearch }
+            showResults={ showResults }
+            fetchedArtist={ fetchedArtist }
           />) }
         />
 
