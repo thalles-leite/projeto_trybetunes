@@ -13,6 +13,7 @@ class App extends React.Component {
   state = {
     disabledLogin: true,
     inputName: '',
+    inputSearch: '',
     loading: false,
     redirectToSearch: false,
   };
@@ -41,7 +42,12 @@ class App extends React.Component {
   };
 
   render() {
-    const { disabledLogin, inputName: value, loading, redirectToSearch } = this.state;
+    const {
+      disabledLogin,
+      inputName,
+      loading,
+      redirectToSearch,
+      inputSearch } = this.state;
 
     return (
       <Switch>
@@ -51,14 +57,22 @@ class App extends React.Component {
           render={ () => (<Login
             handleChange={ this.handleChange }
             disabledLogin={ disabledLogin }
-            value={ value }
+            value={ inputName }
             loading={ loading }
             insertUser={ this.insertUser }
             redirectToSearch={ redirectToSearch }
           />) }
 
         />
-        <Route exact path="/search" component={ Search } />
+        <Route
+          exact
+          path="/search"
+          render={ () => (<Search
+            handleChange={ this.handleChange }
+            value={ inputSearch }
+          />) }
+        />
+
         <Route exact path="/album/:id" render={ () => <Album /> } />
         <Route exact path="/favorites" component={ Favorites } />
         <Route exact path="/profile" component={ Profile } />
