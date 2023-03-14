@@ -12,8 +12,8 @@ class ListAlbuns extends Component {
         {albuns.map(({ collectionName, collectionId }) => (
           <div key={ collectionId }>
             <Link
-              data-testid={ `link-to-album-${collectionId}` }
               to={ `/album/${collectionId}` }
+              data-testid={ `link-to-album-${collectionId}` }
             >
               {collectionName}
             </Link>

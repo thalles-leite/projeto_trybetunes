@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import Search from './pages/Search';
+import getMusics from './services/musicsAPI';
 import searchAlbumsAPI from './services/searchAlbumsAPI';
 import { createUser } from './services/userAPI';
 
@@ -21,6 +22,10 @@ class App extends React.Component {
     fetchedArtist: '',
     search: [],
     showResults: false,
+    idAlbum: '',
+    musics: '',
+    artistAlbum: '',
+    albumName: '',
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -63,6 +68,23 @@ class App extends React.Component {
     });
   };
 
+  callGetMusic = (id) => {
+    this.setState({
+      loading: true,
+    }, async () => {
+      const music = await getMusics(id);
+      console.log(music);
+      const artist = music[0].artistName;
+      const album = music[0].collectionName;
+      this.setState({
+        musics: music,
+        loading: false,
+        artistAlbum: artist,
+        albumName: album,
+      });
+    });
+  };
+
   render() {
     const {
       disabledLogin,
@@ -73,7 +95,11 @@ class App extends React.Component {
       inputSearch,
       search,
       showResults,
-      fetchedArtist } = this.state;
+      fetchedArtist,
+      musics,
+      artistAlbum,
+      albumName,
+    } = this.state;
 
     return (
       <Switch>
@@ -105,7 +131,18 @@ class App extends React.Component {
           />) }
         />
 
-        <Route exact path="/album/:id" render={ () => <Album /> } />
+        <Route
+          exact
+          path="/album/:id"
+          render={ (props) => (<Album
+            { ...props }
+            callGetMusic={ this.callGetMusic }
+            musics={ musics }
+            loading={ loading }
+            artistAlbum={ artistAlbum }
+            albumName={ albumName }
+          />) }
+        />
         <Route exact path="/favorites" component={ Favorites } />
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/profile/edit" component={ ProfileEdit } />
