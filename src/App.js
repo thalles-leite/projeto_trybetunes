@@ -22,7 +22,7 @@ class App extends React.Component {
     fetchedArtist: '',
     search: [],
     showResults: false,
-    idAlbum: '',
+    // idAlbum: '',
     musics: '',
     artistAlbum: '',
     albumName: '',
