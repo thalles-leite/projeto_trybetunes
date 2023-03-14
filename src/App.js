@@ -7,8 +7,6 @@ import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import Search from './pages/Search';
-import { addSong } from './services/favoriteSongsAPI';
-import getMusics from './services/musicsAPI';
 import searchAlbumsAPI from './services/searchAlbumsAPI';
 import { createUser } from './services/userAPI';
 
@@ -27,7 +25,6 @@ class App extends React.Component {
     musics: '',
     artistAlbum: '',
     albumName: '',
-    favoritesList: [],
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -84,7 +81,6 @@ class App extends React.Component {
       musics,
       artistAlbum,
       albumName,
-      favoritesList,
     } = this.state;
 
     return (

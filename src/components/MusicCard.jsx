@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
@@ -56,5 +57,13 @@ class MusicCard extends Component {
     );
   }
 }
-
+MusicCard.propTypes = {
+  trackName: PropTypes.string.isRequired,
+  previewUrl: PropTypes.string.isRequired,
+  trackId: PropTypes.string.isRequired,
+  funcFavorite: PropTypes.func.isRequired,
+  music: PropTypes.shape({
+    trackId: PropTypes.string.isRequired,
+  }).isRequired,
+};
 export default MusicCard;
