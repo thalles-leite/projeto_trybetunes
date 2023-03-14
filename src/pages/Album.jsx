@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import MusicCard from '../components/MusicCard';
 
 class Album extends Component {
   componentDidMount() {
@@ -10,7 +11,7 @@ class Album extends Component {
 
   render() {
     const { musics, artistAlbum, albumName } = this.props;
-    console.log(musics);
+
     return (
       <>
         <Header />
@@ -18,22 +19,7 @@ class Album extends Component {
           <h1 data-testid="artist-name">{artistAlbum}</h1>
           <h2 data-testid="album-name">{albumName}</h2>
           {
-            (musics.length > 0) && (
-
-              musics.slice(1).map(({ previewUrl, trackCount, trackName }) => (
-                <section key={ trackCount }>
-                  <p>{trackName}</p>
-                  <audio
-                    data-testid="audio-component"
-                    src={ previewUrl }
-                    controls
-                  >
-                    <track kind="captions" />
-                    O seu navegador não suporta o elemento
-                    <code>audio</code>
-                  </audio>
-                </section>))
-            )
+            (musics.length > 0) && <MusicCard musics={ musics } />
           }
         </div>
       </>
