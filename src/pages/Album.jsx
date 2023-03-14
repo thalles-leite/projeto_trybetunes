@@ -10,8 +10,13 @@ class Album extends Component {
   }
 
   render() {
-    const { musics, artistAlbum, albumName } = this.props;
-
+    const {
+      musics,
+      artistAlbum,
+      albumName,
+      saveFavorite,
+      favoritesList,
+      loading } = this.props;
     return (
       <>
         <Header />
@@ -19,7 +24,13 @@ class Album extends Component {
           <h1 data-testid="artist-name">{artistAlbum}</h1>
           <h2 data-testid="album-name">{albumName}</h2>
           {
-            (musics.length > 0) && <MusicCard musics={ musics } />
+            (musics.length > 0)
+            && <MusicCard
+              musics={ musics }
+              saveFavorite={ saveFavorite }
+              loading={ loading }
+              favoritesList={ favoritesList }
+            />
           }
         </div>
       </>
@@ -35,6 +46,9 @@ Album.propTypes = {
   musics: PropTypes.string.isRequired,
   artistAlbum: PropTypes.string.isRequired,
   albumName: PropTypes.string.isRequired,
+  saveFavorite: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  favoritesList: PropTypes.string.isRequired,
 };
 
 export default Album;

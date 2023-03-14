@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import Search from './pages/Search';
+import { addSong } from './services/favoriteSongsAPI';
 import getMusics from './services/musicsAPI';
 import searchAlbumsAPI from './services/searchAlbumsAPI';
 import { createUser } from './services/userAPI';
@@ -26,6 +27,7 @@ class App extends React.Component {
     musics: '',
     artistAlbum: '',
     albumName: '',
+    favoritesList: [],
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -73,7 +75,6 @@ class App extends React.Component {
       loading: true,
     }, async () => {
       const music = await getMusics(id);
-      console.log(music);
       const artist = music[0].artistName;
       const album = music[0].collectionName;
       this.setState({
@@ -82,6 +83,19 @@ class App extends React.Component {
         artistAlbum: artist,
         albumName: album,
       });
+    });
+  };
+
+  saveFavorite = (music) => {
+    this.setState({
+      loading: true,
+    }, async () => {
+      await addSong(music);
+      const newMusic = music.trackId;
+      this.setState(({ favoritesList }) => ({
+        favoritesList: [...favoritesList, newMusic],
+        loading: false,
+      }));
     });
   };
 
@@ -99,6 +113,7 @@ class App extends React.Component {
       musics,
       artistAlbum,
       albumName,
+      favoritesList,
     } = this.state;
 
     return (
@@ -141,6 +156,8 @@ class App extends React.Component {
             loading={ loading }
             artistAlbum={ artistAlbum }
             albumName={ albumName }
+            saveFavorite={ this.saveFavorite }
+            favoritesList={ favoritesList }
           />) }
         />
         <Route exact path="/favorites" component={ Favorites } />
