@@ -1,56 +1,60 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class MusicCard extends Component {
-  render() {
-    const { musics, saveFavorite, loading, favoritesList } = this.props;
-    return (
+  state = {
+    favoriteMusic: false,
+    loading: false,
+  };
 
+  async componentDidMount() {
+    this.setState({ loading: true }, async () => {
+      const favoriteMusic = await this.verifyFavorite();
+      this.setState({
+        favoriteMusic,
+        loading: false,
+      });
+    });
+  }
+
+  verifyFavorite = async () => {
+    const { music } = this.props;
+    const musicFavorites = await getFavoriteSongs();
+    return musicFavorites.some(({ trackId }) => music.trackId === trackId);
+  };
+
+  render() {
+    const { trackName,
+      previewUrl,
+      trackId,
+      funcFavorite,
+      music,
+    } = this.props;
+
+    const { favoriteMusic, loading } = this.state;
+    return (
       loading ? <Loading />
         : (
           <div>
-            { musics.slice(1)
-              .map((
-                {
-                  previewUrl,
-                  trackId,
-                  trackName },
-                index,
-              ) => (
-                <section key={ trackId }>
-                  <p>{trackName}</p>
-                  <audio
-                    data-testid="audio-component"
-                    src={ previewUrl }
-                    controls
-                  >
-                    <track kind="captions" />
-                    O seu navegador não suporta o elemento
-                    <code>audio</code>
-                  </audio>
-                  <label>
-                    Favorita
-                    <input
-                      type="checkbox"
-                      name="trackId"
-                      data-testid={ `checkbox-music-${trackId}` }
-                      // o +1 é pq eu tirei o primeiro elemento
-                      onChange={ () => saveFavorite(musics[index + 1]) }
-                      checked={ favoritesList.some((id) => id === trackId) }
-                    />
-                  </label>
-                </section>))}
+            <p>{trackName}</p>
+            <audio data-testid="audio-component" src={ previewUrl } controls>
+              <track kind="captions" />
+              O seu navegador não suporta o elemento
+              <code>audio</code>
+            </audio>
+            <label>
+              <input
+                type="checkbox"
+                data-testid={ `checkbox-music-${trackId}` }
+                onClick={ (event) => funcFavorite(event, music) }
+                checked={ favoriteMusic }
+              />
+              Favorita
+            </label>
           </div>)
-
     );
   }
 }
-MusicCard.propTypes = {
-  musics: PropTypes.string.isRequired,
-  saveFavorite: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  favoritesList: PropTypes.string.isRequired,
-};
 
 export default MusicCard;

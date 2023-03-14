@@ -70,35 +70,6 @@ class App extends React.Component {
     });
   };
 
-  callGetMusic = (id) => {
-    this.setState({
-      loading: true,
-    }, async () => {
-      const music = await getMusics(id);
-      const artist = music[0].artistName;
-      const album = music[0].collectionName;
-      this.setState({
-        musics: music,
-        loading: false,
-        artistAlbum: artist,
-        albumName: album,
-      });
-    });
-  };
-
-  saveFavorite = (music) => {
-    this.setState({
-      loading: true,
-    }, async () => {
-      await addSong(music);
-      const newMusic = music.trackId;
-      this.setState(({ favoritesList }) => ({
-        favoritesList: [...favoritesList, newMusic],
-        loading: false,
-      }));
-    });
-  };
-
   render() {
     const {
       disabledLogin,
@@ -151,13 +122,10 @@ class App extends React.Component {
           path="/album/:id"
           render={ (props) => (<Album
             { ...props }
-            callGetMusic={ this.callGetMusic }
             musics={ musics }
-            loading={ loading }
             artistAlbum={ artistAlbum }
             albumName={ albumName }
-            saveFavorite={ this.saveFavorite }
-            favoritesList={ favoritesList }
+
           />) }
         />
         <Route exact path="/favorites" component={ Favorites } />

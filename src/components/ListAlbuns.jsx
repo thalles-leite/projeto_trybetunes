@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 class ListAlbuns extends Component {
   render() {
     const { albuns } = this.props;
-    console.log(albuns);
     if (albuns.length < 1) return <h1>Nenhum álbum foi encontrado</h1>;
     return (
       <div className="albuns">
