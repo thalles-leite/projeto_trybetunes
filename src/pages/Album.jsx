@@ -6,8 +6,6 @@ import Loading from '../components/Loading';
 
 class Album extends Component {
   state = {
-    artistAlbum: '',
-    albumName: '',
     loading: false,
   };
 
@@ -25,7 +23,6 @@ class Album extends Component {
       loading,
     } = this.state;
     const { funcFavorite, musicCards, loadingMusic, artistAlbum, albumName } = this.props;
-
     return (
       <>
         <Header />
@@ -61,6 +58,8 @@ Album.propTypes = {
   funcFavorite: PropTypes.string.isRequired,
   musicCards: PropTypes.string.isRequired,
   loadingMusic: PropTypes.bool.isRequired,
+  artistAlbum: PropTypes.string.isRequired,
+  albumName: PropTypes.string.isRequired,
   match: PropTypes.shape({
     params: PropTypes.string.isRequired,
   }).isRequired,
