@@ -23,6 +23,7 @@ class Album extends Component {
       loading,
     } = this.state;
     const { funcFavorite, musicCards, loadingMusic, artistAlbum, albumName } = this.props;
+
     return (
       <>
         <Header />

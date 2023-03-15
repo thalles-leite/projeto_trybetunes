@@ -27,7 +27,7 @@ class App extends React.Component {
     musics: '',
     artistAlbum: '',
     albumName: '',
-    musicCards: undefined,
+    musicCards: [],
   };
 
   componentDidMount() {
@@ -48,6 +48,7 @@ class App extends React.Component {
   funcFavorite = (event, music) => {
     const { checked } = event.target;
     const { musicCards } = this.state;
+    console.log(music);
     const updatedMusicCards = [...musicCards]; // Cria uma copia de musicCards
     const musicFound = musicCards
       .findIndex(({ music: musicValue }) => (musicValue === music)); // Econtro o indice correspondente da musica clicada no musicCards
@@ -56,19 +57,38 @@ class App extends React.Component {
         await addSong(music);
         updatedMusicCards[musicFound].isFavorite = true; // Altero esse indice na copia do musicCards
       } else {
+        console.log('removeu');
         await removeSong(music);
         updatedMusicCards[musicFound].isFavorite = false; // ...
       }
-
+      const favoriteSongs = await getFavoriteSongs();
       this.setState({
         loadingMusic: false,
-        musicCards: updatedMusicCards, // Atualizo o musicCard com o array
+        musicCards: updatedMusicCards,
+        favoriteSongs, // Atualizo o musicCard com o array
+      });
+    });
+  };
+
+  funcFavorite2 = (event, music) => {
+    const { checked } = event.target;
+    this.setState({ loadingMusic: true }, async () => {
+      if (checked) {
+        await addSong(music);
+      } else {
+        await removeSong(music);
+      }
+      const favoriteSongs = await getFavoriteSongs();
+      this.setState({
+        loadingMusic: false,
+        favoriteSongs,
       });
     });
   };
 
   loadMusicCards = async () => {
     const { musics } = this.state;
+
     if (musics) {
       const musicCards = await Promise.all(musics.slice(1).map(async (music) => {
         const musicsFavorites = await getFavoriteSongs();
@@ -85,8 +105,11 @@ class App extends React.Component {
           isFavorite,
         });
       }));
-
-      this.setState({ musicCards });
+      const favoriteSongs = await getFavoriteSongs();
+      this.setState({
+        favoriteSongs,
+        musicCards,
+      });
     }
   };
 
@@ -146,8 +169,9 @@ class App extends React.Component {
       albumName,
       musicCards,
       loadingMusic,
+      favoriteSongs,
     } = this.state;
-    console.log(loadingMusic);
+    // console.log(loadingMusic);
     return (
       <Switch>
         <Route
@@ -193,7 +217,20 @@ class App extends React.Component {
             loadingMusic={ loadingMusic }
           />) }
         />
-        <Route exact path="/favorites" component={ Favorites } />
+        <Route
+          exact
+          path="/favorites"
+          render={ () => (<Favorites
+            musicCards={ musicCards }
+            funcFavorite={ this.funcFavorite2 }
+            loadMusicCards={ this.loadMusicCards }
+            callGetMusic={ this.callGetMusic }
+            loadingMusic={ loadingMusic }
+            favoriteSongs={ favoriteSongs }
+          />) }
+
+        />
+
         <Route exact path="/profile" component={ Profile } />
         <Route exact path="/profile/edit" component={ ProfileEdit } />
         <Route exact path="*" component={ NotFound } />
