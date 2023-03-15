@@ -37,7 +37,7 @@ class MusicCard extends Component {
               <input
                 type="checkbox"
                 data-testid={ `checkbox-music-${trackId}` }
-                onClick={ (event) => funcFavorite(event, music) }
+                onChange={ (event) => funcFavorite(event, music) }
                 checked={ favoriteMusic }
               />
               Favorita

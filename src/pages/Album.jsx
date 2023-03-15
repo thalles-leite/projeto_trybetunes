@@ -22,11 +22,9 @@ class Album extends Component {
 
   render() {
     const {
-      artistAlbum,
-      albumName,
       loading,
     } = this.state;
-    const { funcFavorite, musicCards, loadingMusic } = this.props;
+    const { funcFavorite, musicCards, loadingMusic, artistAlbum, albumName } = this.props;
 
     return (
       <>
