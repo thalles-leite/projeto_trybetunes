@@ -34,21 +34,20 @@ class Favorites extends Component {
 
         <div data-testid="page-favorites">
           <h1>Musicas Favoritas</h1>
-          {(loadingMusic) ? <Loading />
-            : favorites && (
-              favorites.map(
-                (music) => (<MusicCard
-                  isFavorite
-                  key={ music.key }
-                  music={ music }
-                  previewUrl={ music.previewUrl }
-                  trackId={ music.trackId }
-                  trackName={ music.trackName }
-                  funcFavorite={ funcFavorite }
-                  loadingMusic={ loadingMusic }
-                />),
-              )
-            )}
+          {(loadingMusic) ? <Loading /> : favorites && (
+            favorites.map(
+              (music) => (<MusicCard
+                isFavorite
+                key={ music.key }
+                music={ music }
+                previewUrl={ music.previewUrl }
+                trackId={ music.trackId }
+                trackName={ music.trackName }
+                funcFavorite={ funcFavorite }
+                loadingMusic={ loadingMusic }
+              />),
+            )
+          )}
         </div>
 
       </>
