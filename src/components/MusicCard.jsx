@@ -1,29 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class MusicCard extends Component {
   state = {
     favoriteMusic: false,
-    loading: false,
   };
 
+  // Ao carregar a página, atualiza o estado favoritMusic de acordo com o isFavorite que é passado por pops.
   async componentDidMount() {
-    this.setState({ loading: true }, async () => {
-      const favoriteMusic = await this.verifyFavorite();
-      this.setState({
-        favoriteMusic,
-        loading: false,
-      });
-    });
+    const { isFavorite } = this.props;
+    this.setState({ favoriteMusic: isFavorite });
   }
-
-  verifyFavorite = async () => {
-    const { music } = this.props;
-    const musicFavorites = await getFavoriteSongs();
-    return musicFavorites.some(({ trackId }) => music.trackId === trackId);
-  };
 
   render() {
     const { trackName,
@@ -31,11 +19,12 @@ class MusicCard extends Component {
       trackId,
       funcFavorite,
       music,
+      loadingMusic,
     } = this.props;
 
-    const { favoriteMusic, loading } = this.state;
+    const { favoriteMusic } = this.state;
     return (
-      loading ? <Loading />
+      loadingMusic ? <Loading />
         : (
           <div>
             <p>{trackName}</p>
@@ -58,12 +47,12 @@ class MusicCard extends Component {
   }
 }
 MusicCard.propTypes = {
+  isFavorite: PropTypes.bool.isRequired,
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.string.isRequired,
   funcFavorite: PropTypes.func.isRequired,
-  music: PropTypes.shape({
-    trackId: PropTypes.string.isRequired,
-  }).isRequired,
+  music: PropTypes.string.isRequired,
+  loadingMusic: PropTypes.bool.isRequired,
 };
 export default MusicCard;

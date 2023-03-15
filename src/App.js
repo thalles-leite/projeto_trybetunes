@@ -7,6 +7,8 @@ import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import Search from './pages/Search';
+import { addSong, getFavoriteSongs, removeSong } from './services/favoriteSongsAPI';
+import getMusics from './services/musicsAPI';
 import searchAlbumsAPI from './services/searchAlbumsAPI';
 import { createUser } from './services/userAPI';
 
@@ -17,14 +19,75 @@ class App extends React.Component {
     inputSearch: '',
     loading: false,
     loadingSearch: false,
+    loadingMusic: false,
     redirectToSearch: false,
     fetchedArtist: '',
     search: [],
     showResults: false,
-    // idAlbum: '',
     musics: '',
     artistAlbum: '',
     albumName: '',
+    musicCards: undefined,
+  };
+
+  componentDidMount() {
+
+  }
+
+  callGetMusic = async (id) => {
+    const music = await getMusics(id);
+    const artist = music[0].artistName;
+    const album = music[0].collectionName;
+    this.setState({
+      musics: music,
+      artistAlbum: artist,
+      albumName: album,
+    }, async () => { this.loadMusicCards(); });
+  };
+
+  funcFavorite = (event, music) => {
+    const { checked } = event.target;
+    const { musicCards } = this.state;
+    const updatedMusicCards = [...musicCards]; // Cria uma copia de musicCards
+    const musicFound = musicCards
+      .findIndex(({ music: musicValue }) => (musicValue === music)); // Econtro o indice correspondente da musica clicada no musicCards
+    this.setState({ loadingMusic: true }, async () => {
+      if (checked) {
+        await addSong(music);
+        updatedMusicCards[musicFound].isFavorite = true; // Altero esse indice na copia do musicCards
+      } else {
+        await removeSong(music);
+        updatedMusicCards[musicFound].isFavorite = false; // ...
+      }
+
+      this.setState({
+        loadingMusic: false,
+        musicCards: updatedMusicCards, // Atualizo o musicCard com o array
+      });
+    });
+  };
+
+  loadMusicCards = async () => {
+    const { musics } = this.state;
+    if (musics) {
+      const musicCards = await Promise.all(musics.slice(1).map(async (music) => {
+        const musicsFavorites = await getFavoriteSongs();
+
+        const isFavorite = musicsFavorites
+          .some(({ trackId }) => music.trackId === trackId);
+
+        return ({
+          key: music.trackId,
+          trackName: music.trackName,
+          previewUrl: music.previewUrl,
+          trackId: music.trackId,
+          music,
+          isFavorite,
+        });
+      }));
+
+      this.setState({ musicCards });
+    }
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -81,8 +144,10 @@ class App extends React.Component {
       musics,
       artistAlbum,
       albumName,
+      musicCards,
+      loadingMusic,
     } = this.state;
-
+    console.log(loadingMusic);
     return (
       <Switch>
         <Route
@@ -121,7 +186,11 @@ class App extends React.Component {
             musics={ musics }
             artistAlbum={ artistAlbum }
             albumName={ albumName }
-
+            funcFavorite={ this.funcFavorite }
+            loadMusicCards={ this.loadMusicCards }
+            callGetMusic={ this.callGetMusic }
+            musicCards={ musicCards }
+            loadingMusic={ loadingMusic }
           />) }
         />
         <Route exact path="/favorites" component={ Favorites } />
