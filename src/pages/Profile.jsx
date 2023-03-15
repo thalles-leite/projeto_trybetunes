@@ -35,7 +35,7 @@ class Profile extends Component {
                   src={ dataUser.image }
                   alt={ dataUser.name }
                 />
-                <Link to="/profile/edit">Editar perfil</Link>
+                <p><Link to="/profile/edit">Editar perfil</Link></p>
               </>
             )}
         </div>
