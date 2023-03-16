@@ -22,7 +22,7 @@ class Login extends Component {
       loading
         ? (loadingElement)
         : (
-          <div data-testid="page-login">
+          <div data-testid="page-login" className="page-login">
             <fieldset>
               <legend>Login</legend>
               <form>

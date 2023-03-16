@@ -1,0 +1,19 @@
+#root {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  
+  .page-login {
+    background-color: green;
+    width: 100%;
+    fieldset{
+
+      background-color: red;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
