@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faStar, faUserCircle }
+  from '@fortawesome/free-solid-svg-icons';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
 
@@ -23,17 +26,38 @@ class Header extends Component {
   };
 
   render() {
-    const { nameUser, loading } = this.state;
-    if (loading) return <Loading />;
+    const { nameUser, loading, loadingMusic } = this.state;
+    if (loading || loadingMusic) return <Loading />;
     return (
-      <div data-testid="header-component">
-        <nav>
-          <Link to="/search" data-testid="link-to-search">Buscar</Link>
-          <Link to="/favorites" data-testid="link-to-favorites">Favoritos</Link>
-          <Link to="/profile" data-testid="link-to-profile">Perfil</Link>
-        </nav>
-        <h1 data-testid="header-user-name">{nameUser}</h1>
-      </div>
+      <section className="containerHeader">
+        <section
+          data-testid="header-user-name"
+          className="header-user-name"
+        >
+          <span>Bem vindo(a): &nbsp;</span>
+          {nameUser}
+        </section>
+        <div data-testid="header-component" className="headerCommponent">
+          <Link to="/">
+            <img className="logoHeader" src="/logo.png" alt="logo" />
+
+          </Link>
+          <nav>
+            <Link to="/search" data-testid="link-to-search">
+              <FontAwesomeIcon icon={ faMagnifyingGlass } />
+
+            </Link>
+            <Link to="/favorites" data-testid="link-to-favorites">
+              <FontAwesomeIcon icon={ faStar } />
+            </Link>
+            <Link to="/profile" data-testid="link-to-profile">
+              <FontAwesomeIcon icon={ faUserCircle } />
+            </Link>
+          </nav>
+
+        </div>
+
+      </section>
     );
   }
 }

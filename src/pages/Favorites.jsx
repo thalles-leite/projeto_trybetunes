@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import MusicCard from '../components/MusicCard';
@@ -27,27 +28,36 @@ class Favorites extends Component {
   render() {
     const { favorites } = this.state;
     const { funcFavorite, loadingMusic } = this.props;
-
+    console.log(favorites);
     return (
       <>
         <Header />
 
-        <div data-testid="page-favorites">
-          <h1>Musicas Favoritas</h1>
-          {(loadingMusic) ? <Loading /> : favorites && (
-            favorites.map(
-              (music) => (<MusicCard
-                isFavorite
-                key={ music.key }
-                music={ music }
-                previewUrl={ music.previewUrl }
-                trackId={ music.trackId }
-                trackName={ music.trackName }
-                funcFavorite={ funcFavorite }
-                loadingMusic={ loadingMusic }
-              />),
-            )
-          )}
+        <div data-testid="page-favorites" className="pageFavorites">
+          <Link className="botaoVoltar" to="/search">⬅</Link>
+          <section className="favoritesHeader">
+            <h1>Musicas Favoritas</h1>
+
+          </section>
+          <section className="musics">
+            {(loadingMusic) ? <Loading /> : favorites && (
+              favorites.map(
+                (music) => (
+                  <MusicCard
+                    isFavorite
+                    key={ music.key }
+                    music={ music }
+                    previewUrl={ music.previewUrl }
+                    trackId={ music.trackId }
+                    trackName={ music.trackName }
+                    funcFavorite={ funcFavorite }
+                    loadingMusic={ loadingMusic }
+                    artistName={ music.artistName }
+                  />
+                ),
+              )
+            )}
+          </section>
         </div>
 
       </>

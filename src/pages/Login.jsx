@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Loading from '../components/Loading';
 
 class Login extends Component {
   render() {
@@ -11,8 +12,6 @@ class Login extends Component {
       loading,
       insertUser,
       redirectToSearch } = this.props;
-    const loadingElement = <span>Carregando...</span>;
-    console.log(`Loading.${loading}`);
 
     if (redirectToSearch) {
       return <Redirect to="/search" />;
@@ -20,42 +19,47 @@ class Login extends Component {
 
     return (
       loading
-        ? (loadingElement)
+        ? (<Loading />)
         : (
-          <div data-testid="page-login" className="page-login">
-            <fieldset>
-              <legend>Login</legend>
-              <form>
-                <input
-                  type="text"
-                  data-testid="login-name-input"
-                  name="inputName"
-                  value={ value }
-                  onChange={ handleChange }
-                />
-                <button
-                  type="button"
-                  data-testid="login-submit-button"
-                  disabled={ disabledLogin }
-                  onClick={ insertUser }
-                >
-                  Entrar
+          <div data-testid="page-login" className="mainLogin">
+            <section className="logo">
+              <img src="/logo.png" alt="logo" />
+            </section>
 
-                </button>
-              </form>
-            </fieldset>
+            <form>
+
+              <input
+                type="text"
+                data-testid="login-name-input"
+                name="inputName"
+                value={ value }
+                onChange={ handleChange }
+                placeholder="Qual é seu nome?"
+                autoComplete="off"
+              />
+
+              <button
+                type="button"
+                data-testid="login-submit-button"
+                disabled={ disabledLogin }
+                onClick={ insertUser }
+              >
+                Entrar
+
+              </button>
+            </form>
           </div>)
     );
   }
 }
 
 Login.propTypes = {
-  disabledLogin: PropTypes.string.isRequired,
-  handleChange: PropTypes.string.isRequired,
+  disabledLogin: PropTypes.bool.isRequired,
+  handleChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
-  loading: PropTypes.string.isRequired,
-  insertUser: PropTypes.string.isRequired,
-  redirectToSearch: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  insertUser: PropTypes.func.isRequired,
+  redirectToSearch: PropTypes.bool.isRequired,
 };
 
 export default Login;

@@ -1,2 +1,412 @@
+// PAGINA LOGIN
+
+.mainLogin{
+    margin-bottom: 15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 150px;
+    
+    
+    .logo {
+      
+      filter: drop-shadow(0 0px 30px rgba(4, 33, 255, 0.979));
+      animation: animacao-sombra 0.5s ease-in-out infinite alternate;      
+      
+      img{
+        width: 100%;
+      }
+    }
+
+    
+
+    form{
+      position: relative;
+      width: 80%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      
+      
+      
+      input{
+        border: none;
+        // border-radius: 10px;
+        width: 100%;
+        padding: 15px;        
+        border-bottom: 1px solid rgba(40, 40, 40, 0.726);
+        color: white;
+        font-size: 1.2em;
+        // background-color: rgb(40,40,40);
+        background-color: transparent;
+        background-image: url('../../public/userIcon.png');
+        background-size: 10%;
+        background-position: right 20px center;
+        background-repeat: no-repeat;
+        filter: $borderBue
+        
+        
+      }
+      
+      input:focus{
+        outline: none;
+      }
+     
+      button{
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 1.2em;
+        background-color:rgb(23, 0, 62);
+        width: 100%;
+        color: white;
+        border: none;
+        font-size: 1em;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      button:disabled{
+        filter: opacity(0.2);
+      }
+    }
+}
+
+
+
+@keyframes animacao-sombra {
+  0% {
+    filter: drop-shadow(0px 0px 100px rgba(0, 33, 246, 0.979));
+  }
+  50% {
+    filter: drop-shadow(0 0 1px rgb(31, 2, 255));
+  }
+  100% {
+    filter: drop-shadow(0px 0px 100px rgba(0, 33, 246, 0.979));
+  }
+}
+
+// HEADER
+
+.containerHeader{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+}
+.headerCommponent{  
+  padding: 5px;
+  background-color: rgb(0, 0, 0);
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  
+  // flex-direction: column;
+  max-width: 600px;
+  nav{
+    flex: 3;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+    a{
+      color: white;
+      display: flex;
+      svg{
+        height: 3.5vh;
+      }
+    }
+  }
+  
+  .logoHeader {
+    
+    left: 0;
+    margin: 10px;
+    height:5vh;
+    animation: animacao-sombra 0.5s ease-in-out infinite alternate;    
+  }
+}
+
+.header-user-name{
+  background-color: rgb(1, 1, 39);
+  display: flex;
+  justify-content: center;
+  padding: 5px 20px;
+  font-size: 0.6em;
+}
+
+// Search
+
+.pageSearch{
+  // background-color: red;
+  display: flex;
+  
+  flex-direction: column;
+  height: 100vh;
+
+  h1{
+    margin: 15px 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  input{
+    border: none;
+    // border-radius: 10px;
+    width: 100%;
+    border-bottom: 1px solid rgba(40, 40, 40, 0.726);
+    color: white;
+    font-size: 1.2em;
+    // background-color: rgb(40,40,40);
+    background-color: transparent;
+    filter: $borderBue
+    
+  }
+  
+  input:focus{
+    outline: none;
+  }
+  form{
+    margin: 30px 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2px;
+    button{
+      aspect-ratio: 1/1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 35px;
+      border-radius: 10px;
+      font-size: 1.2em;
+      background-color:rgb(23, 0, 62);
+      color: white;
+      border: none;
+      font-size: 2em;
+      font-weight: 700;
+      
+    }
+  }
+}
+
+.listAlbuns{
+  
+  margin: 10px;
+
+  .searchTitle{
+    margin: 20px 0;
+  }
+  .albuns{
+    
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 110px ;
+    
+    .itemAlbum{
+      border-radius: 10px;
+      
+      a{
+        display: flex;
+        font-size: 0.8em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        color: white;
+        // padding: 5px;
+        img{
+          aspect-ratio: 1/1;
+          width: 15vw;
+          margin-right: 16px;
+        }
+        .infoAlbum{
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          overflow: hidden;
+          white-space: nowrap;
+          padding-right: 10px;
+          h4{
+            max-width: 100%;
+            font-size: 1rem;
+            width: 100%;
+            // margin: 5px;
+            // text-align: center;
+             text-overflow: ellipsis;
+             overflow: hidden;
+             white-space: nowrap;
+          }
+          p{
+            width: 100%;
+            // margin: 5px;
+            // text-align: center;
+             text-overflow: ellipsis;
+             overflow: hidden;
+             white-space: nowrap;
+          }
+        }
+        
+      }
+     
+    }
+  }
+}
+
+// Page Album
+
+.pageAlbum{
+  
+  
+  .albumImageTitle{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 100%;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    .imgAlbum{
+      align-self: center;
+      background-color: rgb(3, 3, 3);
+      aspect-ratio: 1/1;
+      width: 50%;
+      padding: 1px;
+      border-radius: 500px;
+      margin: 20px;
+    }
+    p {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      
+    }
+  }
+}
+.botaoVoltar{
+  top:20px;
+  left: 20px;
+  font-size: 2em;
+  position: absolute;
+  color: white;
+  text-decoration: none;
+}
+
+//Music card
+
+.musics{
+  height: fit-content;
+  padding-bottom: 50px;
+}
+
+.musicCard{
+  box-shadow: -1px 3px 4px -5px rgba(255,255,255,0.21);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(22, 1, 50, 0.186);
+  
+  overflow: hidden;
+  align-items: center;
+  padding: 5px 15px;
+  margin-bottom: 10px;
+  p{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 0.8em;
+    flex: 4;
+  }
+  .audioPlayer{
+    flex: 1;
+    button{
+      color: white;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+  label{
+    height: 20px;
+    flex:1;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    background-image: url('../../public/coracaoNaoPreenchidoBranco.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    .checkBoxFavorite{
+      display: none;
+    }
+   
+    
+    .favoriteName{
+      color: transparent;
+      font-size: 0.3em;
+    }
+    .heart{
+      font-size: 2em;
+      margin-right: 20px;
+    }
+  }
+}
+label:has(input:checked){
+  background-image: url('../../public/coracaoPreenchido.svg');
+  // color: rgb(254, 89, 89);
+  
+}
+
+//pagina favoritas
+
+.pageFavorites{
+  display: flex;
+  flex-direction: column;
+  
+  .favoritesHeader{
+    margin: 70px 20px;
+  }
+
+}
+
+//Loading
+.loadingContainer{
+  position: absolute;
+  top:0;
+  height: 100vh;
+  width: 100%;
+  background-color: black;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  .imgLoading{
+    height: 150px;
+    width: 50%;
+    background-image: url('../../public/logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    // background-color: rgb(1, 1, 1);  
+  
+    animation: animacao-sombra 1s ease-in-out infinite alternate;
+    // img{
+    // }
+  }
+  p{
+    color: rgb(0, 0, 66);
+  }
+}
 
 

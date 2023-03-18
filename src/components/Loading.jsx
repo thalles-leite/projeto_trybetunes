@@ -3,8 +3,11 @@ import React, { Component } from 'react';
 class Loading extends Component {
   render() {
     return (
-      <div>
-        <h1>Carregando...</h1>
+      <div className="loadingContainer">
+        <section className="imgLoading">
+          {/* <img src="logo.png" alt="..." /> */}
+        </section>
+        <p>Carregando...</p>
       </div>
     );
   }

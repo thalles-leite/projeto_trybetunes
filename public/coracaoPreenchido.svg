@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="5.8795929mm"
+   height="5.291666mm"
+   viewBox="0 0 5.8795929 5.291666"
+   version="1.1"
+   id="svg5"
+   xml:space="preserve"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false" /><defs
+     id="defs2" /><g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-131.32697,-16.806245)"><g
+       style="fill:#800000;stroke:#800000"
+       id="g207"
+       transform="matrix(0.26458333,0,0,0.26458333,131.32697,16.806243)"
+       inkscape:export-filename="coracaoPreenchido.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><path
+         d="M 10.3147,3.34488 11.1106,4.39276 11.907,3.34535 C 12.464,2.61296 13.1834,2.0199 14.0086,1.61292 14.8338,1.20593 15.7422,0.996132 16.6623,1.00006 h 0.0043 c 1.8134,0 2.9577,0.75792 3.6459,1.71277 0.6827,0.94919 0.9096,2.08383 0.9096,2.84276 0,3.93543 -2.5273,7.29581 -5.0332,9.66291 -1.409,1.3219 -2.9474,2.4987 -4.592,3.5125 -0.1308,0.0799 -0.2627,0.1581 -0.3955,0.2346 l -0.0155,0.0084 -0.0101,0.0054 -0.0099,0.0057 -0.0076,0.0043 C 11.1436,18.9964 11.1274,19 11.111,19 11.0942,19 11.0776,18.9962 11.0625,18.9888 L 10.6188,18.727 C 8.97702,17.714 7.44117,16.5387 6.03438,15.2186 3.52637,12.8504 1,9.49112 1,5.55559 1,4.79676 1.22686,3.6623 1.90935,2.71319 2.5975,1.75817 3.74191,1.00006 5.55552,1.00006 c 1.8101,0 3.22699,0.75479 4.18851,1.69823 0.20842,0.20462 0.40067,0.42274 0.57067,0.64659 z"
+         stroke="#444955"
+         stroke-width="2"
+         id="path198"
+         style="fill:#800000;stroke:#800000" /></g></g></svg>
