@@ -71,41 +71,63 @@ class Profile extends Component {
       && inputEmail.length > 0
       && inputImage.length > 0);
     if (redirect) return (<Redirect to="/profile" />);
+    const image = inputImage || '/defaultProfile.png';
     return (
       <div>
         <Header />
-        <div data-testid="page-profile-edit">
+        <div data-testid="page-profile-edit" className="pageProfileEdit">
+          <h1> Editar perfil </h1>
           { loading ? <Loading />
             : (
               <form>
-                <input
-                  type="text"
-                  name="inputName"
-                  value={ inputName }
-                  data-testid="edit-input-name"
-                  onChange={ this.handleChange }
-                />
-                <input
-                  type="text"
-                  name="inputDescription"
-                  value={ inputDescription }
-                  data-testid="edit-input-description"
-                  onChange={ this.handleChange }
-                />
-                <input
-                  type="text"
-                  name="inputEmail"
-                  value={ inputEmail }
-                  data-testid="edit-input-email"
-                  onChange={ this.handleChange }
-                />
-                <input
-                  type="text"
-                  name="inputImage"
-                  value={ inputImage }
-                  data-testid="edit-input-image"
-                  onChange={ this.handleChange }
-                />
+                <section className="profileImage">
+                  <img
+                    data-testid="profile-image"
+                    src={ image }
+                    alt={ inputName }
+                  />
+
+                </section>
+                <label>
+                  <span>Nome:</span>
+                  <input
+                    type="text"
+                    name="inputName"
+                    value={ inputName }
+                    data-testid="edit-input-name"
+                    onChange={ this.handleChange }
+                  />
+                </label>
+                <label>
+                  <span>Descrição:</span>
+                  <input
+                    type="text"
+                    name="inputDescription"
+                    value={ inputDescription }
+                    data-testid="edit-input-description"
+                    onChange={ this.handleChange }
+                  />
+                </label>
+                <label>
+                  <span>Email:</span>
+                  <input
+                    type="text"
+                    name="inputEmail"
+                    value={ inputEmail }
+                    data-testid="edit-input-email"
+                    onChange={ this.handleChange }
+                  />
+                </label>
+                <label>
+                  <span>Imagem:</span>
+                  <input
+                    type="text"
+                    name="inputImage"
+                    value={ inputImage }
+                    data-testid="edit-input-image"
+                    onChange={ this.handleChange }
+                  />
+                </label>
                 <button
                   type="button"
                   data-testid="edit-button-save"

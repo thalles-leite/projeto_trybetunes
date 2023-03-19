@@ -20,22 +20,40 @@ class Profile extends Component {
   render() {
     const { dataUser, loading } = this.state;
 
+    const image = dataUser.image || '/defaultProfile.png';
+    console.log(image);
     return (
       <>
         <Header />
-        <div data-testid="page-profile">
+        <div data-testid="page-profile" className="pageProfile">
           { loading ? <Loading />
             : (
               <>
-                <p>{dataUser.name}</p>
-                <p>{dataUser.description}</p>
-                <p>{dataUser.email}</p>
                 <img
                   data-testid="profile-image"
-                  src={ dataUser.image }
+                  src={ image }
                   alt={ dataUser.name }
                 />
-                <p><Link to="/profile/edit">Editar perfil</Link></p>
+                <section className="dataProfile">
+                  <section>
+                    <span className="labPerf">Nome: </span>
+                    <span>{dataUser.name}</span>
+                  </section>
+
+                  <section>
+                    <span className="labPerf">Email: </span>
+                    <span>{dataUser.email}</span>
+                  </section>
+
+                  <section>
+                    <span className="labPerf">Descrição: </span>
+                    <span>{dataUser.description}</span>
+
+                  </section>
+                  <button type="button" className="btnEditProfile">
+                    <Link to="/profile/edit"> 👤  Editar perfil</Link>
+                  </button>
+                </section>
               </>
             )}
         </div>
