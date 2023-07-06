@@ -17,21 +17,12 @@ class MusicCard extends Component {
     this.setState({ favoriteMusic: isFavorite });
   }
 
-  // componentDidUpdate(prevProps) {
-  //   console.log('ue');
-  //   const audio = this.audioRef.current;
-  //   if (audio && !audio.paused && prevProps.previewUrl !== this.props.previewUrl) {
-  //     audio.pause();
-  //     this.setState({ isPlaying: false });
-  //   }
-  // }
-
   handlePlayClick = () => {
     const { isPlaying } = this.state;
+    const audio = this.audioRef.current;
     if (isPlaying) {
       this.setState({ isPlaying: false });
     }
-    const audio = this.audioRef.current;
 
     audio.addEventListener('ended', () => {
       this.setState({ isPlaying: false });
@@ -81,10 +72,17 @@ class MusicCard extends Component {
               )}
             </div>
 
-            <p>
+            <p
+              className={ isPlaying && 'plaing' }
+            >
               {artistName && <span>{`${artistName} • `}</span>}
               {trackName}
+
             </p>
+            <section className="eqImage">
+
+              {isPlaying && <img src="/equalizer.gif" alt="..." />}
+            </section>
 
             <label
               className="labelCheckBox"

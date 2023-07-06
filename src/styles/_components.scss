@@ -315,19 +315,30 @@
   justify-content: space-between;
   align-items: center;
   background-color: rgba(22, 1, 50, 0.186);
-  
   overflow: hidden;
   align-items: center;
   padding: 5px 15px;
   margin-bottom: 10px;
+  max-height: 36px;
+  gap: 5px;
   p{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: 0.8em;
-    flex: 4;
+    flex: 5;
+    display: flex;
+    justify-content: space-between;
+  }
+  .eqImage{
+    flex:1;
+    
+    img{
+      width: 60%;
+    }
   }
   .audioPlayer{
+    
     flex: 1;
     button{
       color: white;
@@ -366,6 +377,10 @@ label:has(input:checked){
   background-image: url('../../public/coracaoPreenchido.svg');
   // color: rgb(254, 89, 89);
   
+}
+
+.plaing{
+  color:rgb(3, 253, 3)
 }
 
 //pagina favoritas
